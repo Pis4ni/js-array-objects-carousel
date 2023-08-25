@@ -10,7 +10,7 @@ let active = 'active';
 
 console.log(images);
 // ! aggiungo dinamicamente le slides al container
-/* for(const slide of images){
+for(const slide of images){
     console.log('funziona');
 slidesContainerEl.innerHTML += `
 <!-- slides -->
@@ -29,10 +29,30 @@ slidesContainerEl.innerHTML += `
 ` 
 active = ''
 }
-*/
-images.forEach((element, index) => {
-    element.image
-});
 
+
+const imagesArray = document.getElementsByClassName('slide')
+console.log(imagesArray);
+let counter = 0
+
+prevEl.addEventListener('click', ()=>{
+    if (counter >= 0) {
+        counter = imagesArray.legth -1
+    }else{
+        imagesArray[counter].classList.remove('active')
+        counter --
+        imagesArray[counter].classList.add('active')
+    }
+})
+
+nextEl.addEventListener('click', ()=>{
+    if (counter == imagesArray.length -1) {
+        counter = 0
+    }else{
+        imagesArray[counter].classList.remove('active')
+        counter ++
+        imagesArray[counter].classList.add('active')
+    }
+})
 
         
