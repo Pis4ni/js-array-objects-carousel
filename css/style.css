@@ -44,21 +44,23 @@ main{
     position: absolute;
     top: 0;
     z-index: 3;
-    background-color: transparent;
+    
     color: white;
     text-align: center;
     width: 100%;
     padding: 1rem 0 ;
+    background-color: #00000099;
 }
 .slide p{
     position: absolute;
     bottom: 0;
     z-index: 3;
-    background-color: transparent;
+    
     color: white;
     text-align: center;
     width: 100%;
     padding: 1rem 0 ;
+    background-color: #00000099;
 }
 .controls {
     position: absolute;
