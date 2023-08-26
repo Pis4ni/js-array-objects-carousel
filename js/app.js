@@ -51,7 +51,8 @@ for(const slide of images){
 
 }
 
-
+// ! auto scroll
+setInterval(nextSlide,10000)
     
 //! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ON CLICK  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
