@@ -7,8 +7,14 @@ const imagesArray = document.getElementsByClassName('slide')
 const miniatureArray = document.getElementsByClassName('miniature')
 const miniatureContainerEl = document.getElementById('miniature-container')
 
+const playBtn = document.getElementById('play')
+const stopBtn = document.getElementById('stop')
+const invertBtn = document.getElementById('invert')
+
+let direction = 0
 console.log(miniatureArray);
 
+let sliderState = 'next'
 // ! contatore slide attuale
 let counter = 0
 
@@ -37,10 +43,10 @@ for(const slide of images){
             
             <!-- source -->
         <img src="${slide.image}" alt="${slide.text}">
-    </div>
+        </div>
         `
-
-    active = ''
+        
+        active = ''
     
     miniatureContainerEl.innerHTML += `
     <div class="miniature">
@@ -52,25 +58,32 @@ for(const slide of images){
 }
 
 // ! auto scroll
-setInterval(nextSlide,10000)
-    
+// setInterval(nextSlide,50000)
+// let nextInterval = setInterval(nextSlide,50000)
+
+let nextInterval = setInterval(nextSlide,5000)
+clearInterval(nextInterval)
+let prevInterval = setInterval(prevSlide,5000)
+clearInterval(prevInterval)
 //! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ON CLICK  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //! event listener pulsanti
 prevEl.addEventListener('click', prevSlide)
 nextEl.addEventListener('click', nextSlide)
-
+//! event listener miniature
 for (let i = 0; i < miniatureArray.length; i++) {
     console.log(i);
     miniatureArray[i].addEventListener('click', ()=>{
-    txtOnPress(i)
+    // txtOnPress(i)
     selectedSlide(i)
-    })
-    
-    
+    })  
 }
+//! event listener pulsanti controllo slider
+// invertBtn.addEventListener('click',invertSlider)
 
-
+stopBtn.addEventListener('click', stopSlider)
+playBtn.addEventListener('click', playSlider)
+invertBtn.addEventListener('click', invertSlider)
 
 
 //! funzioni ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,8 +134,36 @@ function selectedSlide(index){
     counter = index;
 }
 
-function txtOnPress(minIndex){
+function stopSlider(){
+    clearInterval(nextInterval)
+    clearInterval(prevInterval)
+}
+function playSlider(){
+    clearInterval(prevInterval)
+    clearInterval(nextInterval)
+    nextInterval = setInterval(nextSlide,5000)
+    sliderState = 'next'
+    
+}
+function invertSlider(){
+    clearInterval(prevInterval)
+    clearInterval(nextInterval)
+    if (sliderState = 'next') {
+        prevInterval = setInterval(prevSlide,5000)
+        sliderState = 'prev'
+    }else if (sliderState = 'prev') {
+        nextInterval = setInterval(nextSlide,5000)
+        sliderState = 'next'
+    }else{
+        prevInterval = setInterval(prevSlide,5000)
+    }
+}
+
+
+
+
+/* function txtOnPress(minIndex){
     console.log(typeof minIndex);
     console.log(miniatureArray[minIndex], minIndex,
          typeof minIndex, 'ciao');
-}
+} */
